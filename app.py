@@ -1,3 +1,26 @@
+
+st.header("📈 Stock Price Chart")
+
+stock_name = st.text_input(
+    "Enter Stock Symbol",
+    "RELIANCE.NS",
+    key="chart_stock"
+)
+
+if st.button("Show Stock Chart"):
+    try:
+        stock_data = yf.Ticker(stock_name).history(period="3mo")
+
+        if stock_data.empty:
+            st.warning("Stock data not found")
+        else:
+            st.line_chart(stock_data["Close"])
+            st.metric(
+                "Latest Closing Price",
+                f"₹{stock_data['Close'].iloc[-1]:.2f}"
+            )
+    except Exception as e:
+        st.error(f"Unable to load stock data: {e}")
 import streamlit as st
 import pandas as pd
 import numpy as np
