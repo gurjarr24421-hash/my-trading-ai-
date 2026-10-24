@@ -1,4 +1,6 @@
 
+import streamlit as st
+
 st.header("📈 Stock Price Chart")
 
 stock_name = st.text_input(
